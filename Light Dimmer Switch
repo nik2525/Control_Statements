@@ -1,0 +1,39 @@
+class Light:
+    print("Light Dimmer Switch")  # Print a welcome message when the class is defined
+    def __init__(self):
+        self.valid_levels = list(range(0, 6))  # Define a list of valid brightness levels (0-5)
+
+    def get_brightness(self, level):
+        if level == 0:  # Check if the input level is 0
+            self.switch_off()  # If so, turn off the light
+            return
+
+        if level not in self.valid_levels:  # Check if the input level is not in the valid range
+            print("Invalid input. Please enter a number between 0 and 5.")  # Print an error message
+            return
+
+        brightness = (level - 1) * 25  # Calculate the brightness percentage based on the input level
+        print(f"Setting light to {brightness}% brightness.")  # Print the brightness level
+
+    def switch_off(self):
+        print("Turning off the light.")  # Print a message indicating that the light is turned off
+
+light = Light()  # Create an instance of the Light class
+
+while True:
+    level = input("Enter the light level (0-5): ")  # Prompt the user to enter a light level
+
+    if level.isdigit():  # Check if the input is a digit
+        level = int(level)  # Convert the input to an integer
+        if level == 0:  # Check if the input level is 0
+            light.switch_off()  # If so, turn off the light
+            if input("Do you want to exit the light control? (yes/no) ").lower() != 'yes':  # Ask if the user wants to exit
+                print("Continuing with the light control. Please enter the light level (0-5): ")  # Prompt the user to enter another level
+                continue  # Continue to the next iteration of the loop
+            else:
+                print("Exiting the light control. Goodbye!")  # Print a goodbye message if the user chooses to exit
+                break  # Exit the loop
+        else:
+            light.get_brightness(level)  # If the input level is not 0, adjust the brightness accordingly
+    else:
+        print("Invalid input. Please enter a number between 0 and 5.")  # Print an error message if the input is not a digit
